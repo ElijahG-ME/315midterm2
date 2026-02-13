@@ -1,12 +1,20 @@
-header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
+
 body,
 main,
 figure {
     margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background-image: linear-gradient(to bottom, rgb(4, 216, 212), rgb(173, 246, 243));
+}
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-weight: bold;
+    margin-right: 5%;
+    height: 40px;
 }
 .nav {
     display: flex;
@@ -16,6 +24,21 @@ figure {
 }
 .nav li {
     list-style-type: none;
+    
+}
+.nav a {
+    color: #FFF;
+    text-shadow: 2px 2px 4px #000000;
+    text-decoration: none;
+    transition: transform 0.3s;
+}
+a.active {
+    transform: scale(1.1);
+    color: rgb(211, 197, 197);
+    text-decoration: underline;
+}
+a:hover {
+    transform: translateY(-5px);
 }
 
 .hero {
@@ -34,40 +57,44 @@ figure {
     width: 100%;
     text-align: center;
     font-size: 20px;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
 }
-.intro-text {
-    
+
+.mainbg {
+    margin-left: 30px;
+    margin-right: 30px;
+    text-align: center;
 }
 
 .main-container{
     display: grid;
-    background-color: aqua;
     grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    margin-right: 10px;
     
 }
-.booking {
-    background-color:  lightblue;
-    padding: 15px;
-}
-.weatherBox {
-    background-color:  lightgreen;
-    padding: 15px;
-    text-align: center;
-}
+
 .form-grid {
     display: grid;
     grid-template-columns: 1fr;
     place-items: center;
     row-gap: 5px;
 }
+
 .extra {
     text-align: center;
+}
+.media-header {
+    text-align: center;
+    font-weight: bold;
 }
 .videos {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
+
 .gallery {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -76,19 +103,30 @@ figure {
     place-items: center;
 
 }
+
 .gallery img {
     transition:	transform 0.3s;
     max-width: 70%;
     height:auto;
+    
 }
 .gallery img:hover {
     transform: scale(1.05);
+}
+.gallery figure {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .contactform {
     display: flex;
     flex-direction: column;
     align-items: left;
     margin-left: 40px;
+}
+.italic {
+    font-style: italic;
 }
 
 .contactform input,
@@ -97,17 +135,44 @@ figure {
     width: 40%;
     margin: 10px;
 }
+figcaption {
+    color: #250b34;
+    padding: 10px;
+}
+.main-contact {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    
+}
 
 .contactform button {
     padding: 10px;
     width: 41.5%;
     margin: 10px;
 }
+.contact-buttons{
+    display: flex;
+    width: 41.5%;
+    justify-content: center;
+}
 .about-main{
     display: flex;
     flex-direction: column;
 }
+.about-main h1 {
+    text-align: center;
+}
 
+.story {
+    display: flex;
+    margin-bottom: 20px;
+    flex-direction: row;
+    margin-right: 5px;
+    margin-left: 5px;
+}
 .story img{
     float: left;
     max-width: 20%;
@@ -117,11 +182,35 @@ figure {
 .story p{
     padding: 4px;
     font-size: larger;
+    
+}
+.aside {
+    border-radius: 10px;
+    border: 3px solid rgb(48, 218, 210);
+    background-image: linear-gradient(to bottom, rgb(154, 108, 184), rgb(69, 150, 146));
+    padding: 6px;
+    text-align: center;
+}
+
+.staff-title {
+    padding: 10px;
+    text-align: center;
 }
 .staff-showcase {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
 
+}
+.staff-showcase figure {
+    border-radius: 10px;
+    border: 3px solid rgb(48, 218, 210);
+    background-image: linear-gradient(to bottom, rgb(48, 218, 210), rgb(69, 150, 146));
+    font-size: large;
+    
+}
+.staff-showcase figure figcaption {
+    padding: 10px;
 }
 .staff-showcase img{
     float: left;
@@ -129,6 +218,7 @@ figure {
     height: auto;
     padding: 10px;
 }
+
 
 
 
@@ -144,23 +234,37 @@ figure {
     }
     .main-container{
         display: grid;
-        background-color: aqua;
         grid-template-columns: 1fr;
+        row-gap: 30px;
     }
     .videos {
         display: flex;
+        flex-direction: column; 
+    }
+    
+    .gallery {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 10px;
+        row-gap: 5px;
+        place-items: center;
+    }
+    .story {
         flex-direction: column;
     }
-    .gallery {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 10px;
-    row-gap: 5px;
-    place-items: center;
+    .story img{
+        float: left;
+        max-width: 40%;
+        height:auto;
+        padding: 10px;
     }
     .staff-showcase{
         display: grid;
         grid-template-columns: 1fr;
+        row-gap: 10px;
+    }
+    .main-contact{
+        flex-direction: column;
     }
    
 }

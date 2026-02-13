@@ -61,20 +61,22 @@ async function main(){
     if (wb){
       const weather = await getWeather();
       const text = wmoToText(weather.code);
-      wb.textContent = 
-    `LIVE WEATHER 
-    
-    Banff: ${weather.temp}°C
-    ${text}
-    
-    Wind Speed: ${weather.wind}`;
+      wb.innerHTML = 
+        
+        ` <br>⛅ LIVE WEATHER<br><br>
+        🌡️ Banff: ${weather.temp}°C<br><br>
+        Skies: ${text}<br><br>
+        Wind Speed: ${weather.wind}km/h`;
+      wb.style.fontWeight = "bold";
+      wb.style.fontSize = "large";
 
-    let routeCost = 0;
-    let travelers = 1;
-    let studentdiscount = false;
-    let groupdiscount = false;
+    
   }
 
+  let routeCost = 0;
+  let travelers = 1;
+  let studentdiscount = false;
+  let groupdiscount = false;
 
   checkbox = document.getElementById("student");
   if (checkbox){
@@ -110,7 +112,9 @@ async function main(){
 
   travelersbox = document.getElementById("qty");
   if (travelersbox){
+    
     travelersbox.addEventListener("change", () => {
+      if (travelersbox.value > 10) travelersbox.value = 10;
     travelers = travelersbox.value;
     (travelers >= 5) ? groupdiscount = true : groupdiscount = false;
     updateTotal(routeCost, travelers, studentdiscount, groupdiscount);
@@ -195,8 +199,7 @@ async function main(){
     if (valid) {
       let msg = document.createElement("h3");
       msg.textContent = `Thanks, ${name}, we will contact you soon!`
-      document.getElementById("contactform").remove();
-      document.getElementById("main").appendChild(msg);
+      document.getElementById("contactform").replaceWith(msg);
     }
   });
 
