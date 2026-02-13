@@ -3,12 +3,8 @@ header {
     top: 0;
     z-index: 1000;
 }
-body {
-    margin: 0;
-}
-main {
-    margin: 0;
-}
+body,
+main,
 figure {
     margin: 0;
 }
@@ -17,6 +13,9 @@ figure {
     flex-direction: row;
     justify-content: right;
     gap: 30px;
+}
+.nav li {
+    list-style-type: none;
 }
 
 .hero {
@@ -58,23 +57,89 @@ figure {
     place-items: center;
     row-gap: 5px;
 }
+.extra {
+    text-align: center;
+}
+.videos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 10px;
+    row-gap: 5px;
+    place-items: center;
+
+}
+.gallery img {
+    transition:	transform 0.3s;
+    max-width: 70%;
+    height:auto;
+}
+.gallery img:hover {
+    transform: scale(1.05);
+}
+.contactform {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin-left: 40px;
+}
+
+.contactform input,
+.contactform textarea{
+    padding: 10px;
+    width: 40%;
+    margin: 10px;
+}
+
+.contactform button {
+    padding: 10px;
+    width: 41.5%;
+    margin: 10px;
+}
+
+.story img{
+    float: left;
+    max-width: 20%;
+    height:auto;
+    padding: 10px;
+}
+.story p{
+    padding: 4px;
+    font-size: larger;
+}
+
 
 
 @media (max-width: 768px) {
     .nav {
         flex-direction: column;
-        justify-content: center;
         gap: 0px;
+        align-items: flex-end;
     }
     .hero {
         height: 170px;
         overflow: hidden;
     }
     .main-container{
-    display: grid;
-    background-color: aqua;
-    grid-template-columns: 1fr;
-    
+        display: grid;
+        background-color: aqua;
+        grid-template-columns: 1fr;
     }
+    .videos {
+        display: flex;
+        flex-direction: column;
+    }
+    .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 10px;
+    row-gap: 5px;
+    place-items: center;
+
+}
    
 }

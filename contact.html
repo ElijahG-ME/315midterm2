@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
 </head>
 <body>
 
@@ -15,15 +16,17 @@
         </ul>
     </header>
 
-    <main>
-        <section>
-            <h2>Section</h2>
-            <p>Main content goes here.</p>
-        </section>
-
-        <aside>
-            <p>Aside content.</p>
-        </aside>
+    <main id="main">
+        <form class="contactform" id="contactform">
+            <h3>Contact Form</h3>
+            <label for="contactname">Name: </label><input type="text" id="contactname">
+            <label for="contactemail">Email: </label><input type="text" id="contactemail">
+            <label for="contactphone">Phone: </label><input type="tel" id="contactphone">
+            <label for="message">Message</label><textarea id="message"></textarea> 
+            <button id="submitform">Send Message</button>
+        </form>
+        
+    
     </main>
 
     <footer>

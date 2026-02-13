@@ -53,39 +53,49 @@ function updateTotal(routeCost, travelers, studentdiscount, groupdiscount) {
   document.getElementById("estTotal").textContent = `Estimated Total: ${formatter.format(estimated_total)}`;
 }
 
-async function main(){
-  const weather = await getWeather();
-  const text = wmoToText(weather.code);
-  document.getElementById("weatherBox").textContent = 
-  `LIVE WEATHER 
-  
-  Banff: ${weather.temp}°C
-  ${text}
-  
-  Wind Speed: ${weather.wind}`;
 
-  let routeCost = 0;
-  let travelers = 1;
-  let studentdiscount = false;
-  let groupdiscount = false;
+
+async function main(){
+  
+  const wb = document.getElementById("weatherBox")
+    if (wb){
+      const weather = await getWeather();
+      const text = wmoToText(weather.code);
+      wb.textContent = 
+    `LIVE WEATHER 
+    
+    Banff: ${weather.temp}°C
+    ${text}
+    
+    Wind Speed: ${weather.wind}`;
+
+    let routeCost = 0;
+    let travelers = 1;
+    let studentdiscount = false;
+    let groupdiscount = false;
+  }
 
 
   checkbox = document.getElementById("student");
-  checkbox.addEventListener("change", () => {
-    (checkbox.checked) ? studentdiscount = true : studentdiscount = false;
-    updateTotal(routeCost, travelers, studentdiscount, groupdiscount);
-  });
+  if (checkbox){
+      checkbox.addEventListener("change", () => {
+      (checkbox.checked) ? studentdiscount = true : studentdiscount = false;
+      updateTotal(routeCost, travelers, studentdiscount, groupdiscount);
+    });
+  }
+  
 
   route_selector = document.getElementById("route");
-  route_selector.addEventListener("change", () => {
+  if (route_selector){
+    route_selector.addEventListener("change", () => {
     switch (route_selector.value) {
-      case "C2B":
+      case "Banff":
         routeCost = 50;
         break;
-      case "E2J":
+      case "Jasper":
         routeCost = 90;
         break;
-      case "C2LL":
+      case "Lake Louise":
         routeCost = 70;
         break;
       default:
@@ -93,34 +103,105 @@ async function main(){
         break;
     }
     updateTotal(routeCost, travelers, studentdiscount, groupdiscount);
-  })
+    })
+
+  }
+  
 
   travelersbox = document.getElementById("qty");
-  travelersbox.addEventListener("change", () => {
+  if (travelersbox){
+    travelersbox.addEventListener("change", () => {
     travelers = travelersbox.value;
     (travelers >= 5) ? groupdiscount = true : groupdiscount = false;
     updateTotal(routeCost, travelers, studentdiscount, groupdiscount);
-  })
+    })
+  }
+  
 
   resetBtn = document.getElementById("reset");
-  resetBtn.addEventListener("click", () => {
-    updateTotal(0, 1, false, false);
-  });
+  if (resetBtn){
+    resetBtn.addEventListener("click", () => {
+      updateTotal(0, 1, false, false);
+    });
+  }
 
   bookTrip = document.getElementById("book");
-  bookTrip.addEventListener("click", (e) => {
+  if (bookTrip){
+    
+    bookTrip.addEventListener("click", (e) => {
+      let valid = true;
+      e.preventDefault();
+      if (document.getElementById("name").value === "") {
+        alert("Name must be filled in");
+        valid = false;
+      }
+      if (document.getElementById("email").value === "") {
+        alert("Email must be filled in");
+        valid = false;
+      }
+      if (document.getElementById("route").value == "None") {
+        alert("Route must be selected");
+        valid = false;
+      }
+      if (valid) {
+        const confirm = document.createElement("h4");
+        confirm.textContent = `Thank you ${document.getElementById("name").value}! Your booking for ${travelers} people to ${document.getElementById("route").value}
+        has been received. A confirmation email has been sent to ${document.getElementById("email").value}.`
+        confirm.id = "confirm";
+        document.getElementById("extra").appendChild(confirm);
+      }
+
+
+    });
+
+
+  }
+
+  const form = document.getElementById("submitform");
+  if (form){
+    
+    form.addEventListener("click", (e) => {
+      
     e.preventDefault();
-    if (document.getElementById("name").value === "") {
-      alert("Name must be filled in");
+    const name = document.getElementById("contactname").value;
+    const email = document.getElementById("contactemail").value;
+    const phone = document.getElementById("contactphone").value;
+    const message = document.getElementById("message").value;
+    const phoneRegex = /^\d{10}$/;
+
+    let valid = true;
+
+    if (name === "") {
+      alert("Name is required.");
+      valid = false;
+      document.getElementById("contactname").style.border = "2px solid red";
     }
-    if (document.getElementById("email").value === "") {
-      alert("Email must be filled in");
+    if (!email.includes("@") || !email.includes(".") || email === "") {
+      alert("Email must be valid.");
+      valid = false;
+      document.getElementById("contactemail").style.border = "2px solid red";
     }
-    if (document.getElementById("route").value == "None") {
-      alert("Route must be selected");
+    if (phone === "" || !phoneRegex.test(phone)) {
+      alert("Phone must be valid.");
+      valid = false;
+      document.getElementById("contactphone").style.border = "2px solid red";
+    }
+    if (message === "") {
+      alert("Message cannot be empty.");
+      valid = false;
+      document.getElementById("message").style.border = "2px solid red"
+    }
+
+    if (valid) {
+      let msg = document.createElement("h3");
+      msg.textContent = `Thanks, ${name}, we will contact you soon!`
+      document.getElementById("contactform").remove();
+      document.getElementById("main").appendChild(msg);
     }
   });
 
+  }
+  
 }
 main();
 
